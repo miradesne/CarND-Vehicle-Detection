@@ -19,6 +19,8 @@ The goals / steps of this project are the following:
 [image7]: ./output_images/frame1.png
 [image8]: ./output_images/frame5.png
 [image9]: ./output_images/frame6.png
+[image10]: ./output_images/normalized_features.png
+[image11]: ./output_images/HLS.png
 [video1]: ./project_output.mp4
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
@@ -54,6 +56,9 @@ Here is an example using the `HLS` color space and HOG parameters of `orientatio
 
 I started from orientation 6 and settled down on 9 because it has all common directions. I started from RGB, but switched to HLS because the channels have more distinct features while RGB has redundant features between the 3 channels. I also tried other various combinations of parameters and different color spaces to check which one could have the best accuracy. I tested them fast on a smaller sample size (500) of training data by splitting the train/test data to 0.8/0.2. 
 
+Here's an example of the HLS color space:
+![alt text][image11]
+
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
 I created a linear SVM using sklearn.svm library. Then I trained the classifier by using HOG features on all channels, spatial features, and color histogram features. The code that I trained the model is defined in a function called `train()` in the class `Classifier` in `train_model.py`.
@@ -77,6 +82,9 @@ Here's an example of the windows.
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
 Ultimately I searched on scale 1.3 using HLS 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result. I also use heat map to remove some false positive points.
+
+I also made sure that I normalized the features so none of them would dominate the others:
+![alt text][image10]
 
 Here are some example output images with heat maps:
 
